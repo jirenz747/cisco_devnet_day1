@@ -17,6 +17,6 @@ flask run
 
 Тестировалось на CSRv
 
-![Иллюстрация к проекту](https://github.com/jirenz747/cisco_devnet_day1/img/cdp.png)
+![Иллюстрация к проекту](https://github.com/jirenz747/cisco_devnet_day1/raw/master/img/devices.png)
 
 
