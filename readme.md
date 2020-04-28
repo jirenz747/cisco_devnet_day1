@@ -9,8 +9,8 @@
 Редактируем файл cisco_devnet_day1/app/hosts.yaml
 
 Запускаем локально flask
-export FLASK_APP=devnet_day_one.py
-flask run
+1. export FLASK_APP=devnet_day_one.py
+2. flask run
 
 После чего заходим http://127.0.0.1:5000/
 
