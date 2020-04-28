@@ -19,4 +19,6 @@ flask run
 
 ![Иллюстрация к проекту](https://github.com/jirenz747/cisco_devnet_day1/raw/master/img/devices.png)
 
+![Иллюстрация к проекту](https://github.com/jirenz747/cisco_devnet_day1/raw/master/img/cdp.png)
+
 
