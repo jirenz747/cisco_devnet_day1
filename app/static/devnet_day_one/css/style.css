@@ -1,6 +1,7 @@
 
 .table_container { width: 800px;}
 
-.wrong { background: yellow }
-.danger { background: red }
-.ok { background: green }
+.wrong { background: yellow; }
+.danger { background: red; }
+.ok { background: green; }
+.table { text-align: center; }
