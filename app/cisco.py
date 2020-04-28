@@ -33,9 +33,9 @@ class Cisco:
 
     def get_ntp(self):
         ntp_out = self._net.send_command('sh ntp status')
-        if 'synchronized' in ntp_out:
-            return {'ntp': True}
-        return {'ntp': False}
+        if 'unsynchronized' in ntp_out:
+            return {'ntp': False}
+        return {'ntp': True}
 
     def set_commands(self, commands):
         self._net.send_config_set(commands)
