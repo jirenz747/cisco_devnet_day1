@@ -28,7 +28,6 @@ def index():
 
 
 def apply_connect(hostname, device, commands):
-
     c = Cisco(device)
     result[hostname] = {'ip': device['host']}
     result[hostname].update(c.get_cdp())
