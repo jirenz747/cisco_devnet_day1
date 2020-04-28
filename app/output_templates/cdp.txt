@@ -4,4 +4,4 @@ Value REMOTE_PORT (.*)
 
 Start
   ^Device ID: ${DEST_HOST}
-  ^Interface: ${LOCAL_PORT},  Port ID \(outgoing port\): ${REMOTE_PORT}
+  ^Interface: ${LOCAL_PORT},  Port ID \(outgoing port\): ${REMOTE_PORT} -> Record
