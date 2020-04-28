@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{{url_for('static', filename='devnet_day_one/css/style.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='devnet_day_one/css/lib/bootstrap.min.css')}}">
+        <title>devnet_day_one</title>
+        <script src="{{url_for('static', filename='devnet_day_one/js/lib/jquery-3.3.1.min.js')}}"></script>
+        <script src="{{url_for('static', filename='devnet_day_one/js/lib/popper.min.js')}}"></script>
+        <script src="{{url_for('static', filename='devnet_day_one/js/lib/bootstrap.min.js')}}"></script>
+    </head>
+<body>
+
+
+<div class="table_container">
+<table class="table table-condensed table-hover table-sm" border="1">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Hostname</th>
+        <th scope="col">IP</th>
+        <th scope="col">Model</th>
+        <th scope="col">Version</th>
+        <th scope="col">NPE PE</th>
+        <th scope="col">CDP</th>
+        <th scope="col">NTP</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for device in devices %}
+        <tr>
+            <td scope="row">{{ loop.index }}</td>
+            <td scope="row">{{ device }}</td>
+            <td scope="row">{{ devices[device].ip }}</td>
+            <td scope="row">{{ devices[device].model }}</td>
+            <td scope="row">{{ devices[device].version }}</td>
+            <td scope="row">{{ devices[device].npe }}</td>
+            {% if devices[device].cdp_active == False %}
+                <td scope="row" class="danger">CDP is OFF</td>
+            {% else %}
+                <td scope="row" class="ok">
+
+                {% if devices[device].cdp %}
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_number_{{ loop.index }}">
+                      show cdp neighbors
+                    </button>
+                {% else %}
+                    CDP is running
+                {% endif %}
+
+            </td>
+            {% endif %}
+            {% if devices[device].ntp %}
+                <td scope="row" class="ok">Sync</td>
+            {% else %}
+                <td scope="row" class="wrong">Not sync</td>
+            {% endif %}
+
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
+{% for device in devices %}
+    {% if devices[device].cdp == False %}
+        <p>False</p>
+        {{ loop.nextitem }}
+    {% else %}
+<div class="modal fade" id="modal_number_{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="modal_label_{{ loop.index }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_label_{{ loop.index }}">{{ device }} - cdp neighbors </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-condensed table-hover table-sm" border="1">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Neighbor name</th>
+                            <th scope="col">Local Port</th>
+                            <th scope="col">Remote Port</th>
+
+                        </tr>
+                     </thead>
+                    <tbody>
+                        {% for cdp in devices[device].cdp %}
+                        <tr>
+                            <td scope="row">{{ loop.index }}</td>
+                            <td scope="row">{{ cdp[0] }}</td>
+                            <td scope="row">{{ cdp[1] }}</td>
+                            <td scope="row">{{ cdp[2] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endif %}
+{% endfor %}
+
+
+</body>
+</html>
